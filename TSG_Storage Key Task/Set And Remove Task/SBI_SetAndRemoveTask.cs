@@ -18,9 +18,18 @@ public class SBI_SetAndRemoveTask : MonoBehaviour
     [SerializeField] 
     private string _textBlock;
 
+    /// <summary>
+    /// Удалять ли Task при уничтожении этого обьекта
+    /// </summary>
     [SerializeField] 
-    private bool _removeTaskBlockOnDestroy = true;
+    private bool _removeTaskOnDestroy = true;
 
+    /// <summary>
+    /// Будет ли автоматически создано хранилеще с Task по ключу(если его не было), при добавлении Task 
+    /// </summary>
+    [SerializeField] 
+    private bool _autoCreateStorageTask = false; 
+    
     private TSG_StorageKeyTaskDataMono _storageKeyTask;
     
     private bool _isInit = false;
@@ -53,15 +62,23 @@ public class SBI_SetAndRemoveTask : MonoBehaviour
         OnInit?.Invoke();
     }
 
-    public void SetTaskBlockOpen()
+    public void SetTask()
     {
+        if (_autoCreateStorageTask == true) 
+        {
+            if (_storageKeyTask.IsKey(_keyStorageTask.GetData()) == false)
+            {
+                _storageKeyTask.AddTaskData(_keyStorageTask.GetData(), new TSG_StorageTaskDefaultData());
+            }    
+        }
+        
         if (_storageKeyTask.GetTaskData(_keyStorageTask.GetData()).IsKeyTask(_keyTask.GetData()) == false)
         {
             _storageKeyTask.GetTaskData(_keyStorageTask.GetData()).AddTask(_keyTask.GetData(), _textBlock);
         }
     }
 
-    public void RemoveTaskBlockOpen()
+    public void RemoveTask()
     {
         if (_storageKeyTask.GetTaskData(_keyStorageTask.GetData()).IsKeyTask(_keyTask.GetData()) == true)
         {
@@ -71,9 +88,9 @@ public class SBI_SetAndRemoveTask : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_removeTaskBlockOnDestroy == true)
+        if (_removeTaskOnDestroy == true)
         {
-            RemoveTaskBlockOpen();
+            RemoveTask();
         }
     }
 }

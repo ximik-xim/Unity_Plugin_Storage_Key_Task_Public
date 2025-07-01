@@ -49,7 +49,8 @@ public class TSG_StorageKeyTaskDataMono : MonoBehaviour //where Data : AbsStorag
         if (_visibleData == true)
         {
             AddKeyVisible(key, data);
-        }   
+            data._visibleData = true;
+        }
 #endif
     }
     
