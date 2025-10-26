@@ -19,3 +19,6 @@ Unity_Plugin-TList_Public - https://github.com/ximik-xim/Unity_Plugin-General_Pu
 
 Unity_Plugin_List_Task_Public - https://github.com/ximik-xim/Unity_Plugin_List_Task_Public
 
+---------------------------------------------------------------------------------------------------------
+
+Ну и так же нужно восстановить ключи TList из бэкапов. Для этого нажимаем на папку TSG_Storage Key Task кнопкой ПКМ и заходим в пункт TList -> К папке -> Стереть и восстановить все данные
